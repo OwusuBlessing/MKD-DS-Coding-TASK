@@ -1,6 +1,6 @@
 import torch
 from src.product_recommender.image_recognition.model import TinyVGG
-from torchvision import transform
+from torchvision import transforms
 from PIL import Image
 
 def load_tinyvgg_model(model_save_path, input_shape, hidden_units, output_shape, device):
@@ -40,12 +40,7 @@ data_transform = transforms.Compose([
 )
 
 
-loaded_model = load_tinyvgg_model(input_shape=3,
-                                  model_save_path="/kaggle/working/models/tinyvgg_model_1.pth",
-                                  hidden_units=10,
-                                  output_shape=3,
-                                  device =device
-)
+
 
 
 

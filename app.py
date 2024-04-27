@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request,redirect
 from src.product_recommender.endpoints.natural_query import query
 from src.product_recommender.OCR.extract_text import extract_text
+from src.product_recommender.image_recognition.predict import data_transform,load_tinyvgg_model,predict
 import os
 
 app = Flask(__name__)
@@ -58,6 +59,49 @@ def process_image():
     else:
         # If no file was uploaded, redirect back to the upload page
         return redirect('/upload_image_ocr')
+
+
+@app.route('/upload_image_cnn')
+def upload_image_cn():
+    return render_template('upload_image_cnn.html')
+
+UPLOAD_FOLDER_CNN = 'uploads_cnn'
+@app.route('/process_image_cnn', methods=['POST'])
+def process_image_cn():
+    
+    # Get the uploaded file
+    uploaded_file = request.files['image_file']
+    
+    # Save the uploaded file to the server
+    if uploaded_file:
+        # Create the upload folder if it doesn't exist
+        if not os.path.exists(UPLOAD_FOLDER_CNN):
+            os.makedirs(UPLOAD_FOLDER_CNN)
+        
+        filename = uploaded_file.filename
+        image_path = os.path.join(UPLOAD_FOLDER_CNN, filename)
+        uploaded_file.save(image_path)
+
+        if os.path.exists(image_path):
+
+            loaded_model = load_tinyvgg_model(input_shape=3,
+                                  model_save_path="Artifacts/trained_models/tinyvgg_model_1.pth",
+                                  hidden_units=10,
+                                  output_shape=3,
+                                  device ="cpu"
+)
+            #predict label from image
+            name,label = predict(model=loaded_model,image_path=image_path,
+                        transform = data_transform)
+
+            
+            result =  query(name) #pass text to recommnder engine
+            # Render the upload_image.html template with the result and image path
+           
+            return render_template('upload_image_cnn.html',result=result, image_path=image_path)
+    else:
+        # If no file was uploaded, redirect back to the upload page
+        return redirect('/upload_image_cnn')
 
 
 if __name__ == '__main__':
