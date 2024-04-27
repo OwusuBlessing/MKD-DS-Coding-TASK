@@ -169,44 +169,46 @@ After setting up your environment, ensure you have:
 open `.env` file and paste your tokens
 
 ```env
-PINECONE_CLOUD=""
-PINECONE_REGION=""
+PINECONE_CLOUD="aws"
+PINECONE_REGION="us-east-1"
 PINECONE_API_KEY="Your pinecone api key"
 
 ```
 
-Then run ```
+Then run
+
+```
 pip install -r requirements.txt
-
 ```
+
 To launch the application, open your terminal and enter the following command:
-```
 
+```
 python app.py
-
 ```
+
 This will initiate a local server, allowing you to access the application through your web browser."
+
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
-
 <!-- CONTACT -->
+
 ## Contact
+
 Name - Owusu Samule Blessing
 Email - owususammy509@gmail.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
 Here is a list of resources that proven to be really helpful in implementing this project
 
-*[pinecone documentation](https://docs.pinecone.io/guides/getting-started/overview)
-*[flask documentation](https://flask.palletsprojects.com/en/3.0.x/)
+_[pinecone documentation](https://docs.pinecone.io/guides/getting-started/overview)
+_[flask documentation](https://flask.palletsprojects.com/en/3.0.x/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-```
