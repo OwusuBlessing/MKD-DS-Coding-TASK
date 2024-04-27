@@ -1,0 +1,16 @@
+numpy
+pandas
+ipykernel
+setuptools
+python-box
+ensure
+pyyaml
+pinecone-client
+sentence-transformers
+python-dotenv
+pinecone_datasets
+pytesseract
+scrapy
+selenium
+undetected-chromedriver
+flask

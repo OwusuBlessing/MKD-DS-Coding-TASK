@@ -1,0 +1,5 @@
+artifact_root: Artifacts
+
+data_preparation:
+  data_path: Artifacts/data_preparation/dataset.csv
+  cleaned_data:Artifacts/data_preparation/cleaned_data.csv
