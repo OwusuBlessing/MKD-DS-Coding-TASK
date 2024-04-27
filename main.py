@@ -31,12 +31,23 @@ print("****************************************************")
 
 print("Training data scraping started ..................")
 print("****************************************************")
-run_scraper()
+#run_scraper()
 print("Training data scraping completed ..................")
 print("****************************************************")
                                                                              
 
+from src.product_recommender.image_recognition.predict import data_transform,load_tinyvgg_model,predict
 
 
+loaded_model = load_tinyvgg_model(input_shape=3,
+                                  model_save_path="Artifacts/trained_models/tinyvgg_model_1.pth",
+                                  hidden_units=10,
+                                  output_shape=3,
+                                  device ="cpu"
+)
 
+x,y = predict(model=loaded_model,image_path="Uploads/choco-test.jpg",
+              transform = data_transform)
+
+print(x,y)
 

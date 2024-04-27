@@ -14,3 +14,5 @@ scrapy
 selenium
 undetected-chromedriver
 flask
+beautifulsoup4
+requests

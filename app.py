@@ -23,8 +23,6 @@ def recommend():
     
     # Process the input text and generate result (a list)
     result =  query(input_text)
-
-    
     return render_template('home.html',result=result)
 
 
