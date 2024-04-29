@@ -172,6 +172,7 @@ open `.env` file and paste your tokens
 PINECONE_CLOUD="aws"
 PINECONE_REGION="us-east-1"
 PINECONE_API_KEY="Your pinecone api key"
+OPENAI_API_KEY="Your openai api key"
 
 ```
 

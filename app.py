@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request,redirect
-from src.product_recommender.endpoints.natural_query import query
+from src.product_recommender.endpoints.natural_query import query,llm_response
 from src.product_recommender.OCR.extract_text import extract_text
 from src.product_recommender.image_recognition.predict import data_transform,load_tinyvgg_model,predict
 import os
@@ -23,7 +23,7 @@ def recommend():
     input_text = request.form['input_text']
     
     # Process the input text and generate result (a list)
-    result =  query(input_text)
+    result =  llm_response(query(input_text))
     return render_template('home.html',result=result)
 
 
@@ -52,7 +52,7 @@ def process_image():
         if os.path.exists(image_path):
 
             processed_text = extract_text(img_path=image_path) #extract text wit ocr
-            result =  query(processed_text) #pass text to recommnder engine
+            result =  llm_response(query(processed_text)) #pass text to recommnder engine
             # Render the upload_image.html template with the result and image path
            
             return render_template('upload_image_ocr.html',result=result, image_path=image_path)
@@ -95,7 +95,7 @@ def process_image_cn():
                         transform = data_transform)
 
             
-            result =  query(name) #pass text to recommnder engine
+            result =  llm_response(query(name)) #pass text to recommnder engine
             # Render the upload_image.html template with the result and image path
            
             return render_template('upload_image_cnn.html',result=result, image_path=image_path)

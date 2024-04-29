@@ -16,3 +16,4 @@ undetected-chromedriver
 flask
 beautifulsoup4
 requests
+openai

@@ -25,6 +25,17 @@
         .form-group {
             margin-bottom: 20px;
         }
+
+        ul.recommended-products {
+            padding-left: 0;
+            list-style: none;
+        }
+        ul.recommended-products li {
+            background: #f0f0f0;
+            margin-bottom: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -41,25 +52,19 @@
         {% if result %}
         <hr>
         <h2 class="mb-3">Recommended Products:</h2>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price($)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in result %}
-                    <tr>
-                        <td>{{ item.product }}</td>
-                        <td>{{ item.price }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% endif %}
+        <ul class="recommended-products">
+            {% set lines = result.split('\n') %}
+            {% for line in lines if line.strip() %}
+                {% if loop.index != 1 and loop.index != lines|length %}
+                    <li>{{ line }}</li>
+                {% else %}
+                    {{ line }}  {# Render the line without <li> tags #}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    
     </div>
 </body>
 </html>

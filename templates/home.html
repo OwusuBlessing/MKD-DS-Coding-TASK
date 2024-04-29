@@ -9,12 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <style>
-        /* Custom CSS */
         body {
             background-color: #f8f9fa;
         }
         .container {
-            margin-top: 10px;
             max-width: 800px;
             margin: 0 auto;
             padding: 50px 20px;
@@ -25,6 +23,16 @@
         }
         .btn-options {
             margin-top: 20px;
+        }
+        ul.recommended-products {
+            padding-left: 0;
+            list-style: none;
+        }
+        ul.recommended-products li {
+            background: #f0f0f0;
+            margin-bottom: 5px;
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -39,39 +47,30 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
         {% if result %}
         <hr>
         <h2 class="mb-3">Recommended Products:</h2>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price($)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in result %}
-                    <tr>
-                        <td>{{ item.product }}</td>
-                        <td>{{ item.price }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% endif %}
-        
+        <ul class="recommended-products">
+            {% set lines = result.split('\n') %}
+            {% for line in lines if line.strip() %}
+                {% if loop.index != 1 and loop.index != lines|length %}
+                    <li>{{ line }}</li>
+                {% else %}
+                    {{ line }}  {# Render the line without <li> tags #}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    
+
         <hr>
         <h2>Other Options:</h2>
         <div class="btn-options text-center">
-            <!-- Link to OCR upload page -->
             <a href="/upload_image_ocr" class="btn btn-secondary mr-3">Use OCR</a>
-            <!-- Button for uploading image -->
-            <a href="/upload_image_cnn" class="btn btn-secondary mr-3">Upload image</a>>
+            <a href="/upload_image_cnn" class="btn btn-secondary mr-3">Upload image</a>
         </div>
     </div>
-
-    
 </body>
 </html>

@@ -2,6 +2,10 @@ from sentence_transformers import SentenceTransformer
 import torch
 from pinecone import Pinecone
 import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 
@@ -45,3 +49,22 @@ def query(query):
         
 
         return text_list
+
+
+
+
+client = OpenAI()
+
+def llm_response(res):
+    response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": "You are a sale assistant that takes in recommended products for a user as input and their respective price and say tell it to user in natural language and nice way."},
+        
+        {"role": "user", "content":f"{res}"}
+    ]
+    )
+
+    ans = response.choices[0].message.content
+
+    return ans

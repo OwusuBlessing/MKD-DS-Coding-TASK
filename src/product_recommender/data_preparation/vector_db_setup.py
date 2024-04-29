@@ -21,9 +21,7 @@ class VectorDB:
     
         self.data_path = data_path
 
-    def setup_vectordb(self,api_key=os.getenv('PINECONE_API_KEY')):
-
-
+    def setup_vectordb(self,api_key=os.getenv('PINECONE_API_KEY')):   
         pc = Pinecone(api_key=api_key)
         cloud = os.getenv('PINECONE_CLOUD')
         region = os.getenv('PINECONE_REGION')
